@@ -10,6 +10,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #0a0a1a;
+            overflow-x: hidden;
         }
 
         .glow-background {
@@ -28,15 +29,7 @@
             height: 100vh;
             background: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.4) 0%, rgba(236, 72, 153, 0.4) 50%, rgba(10, 10, 26, 0) 70%);
             filter: blur(150px);
-            animation: fog-drift 25s infinite ease-in-out;
-        }
-
-        @keyframes fog-drift {
-            0% { transform: translate(-30%, -30%) scale(1); opacity: 0.9; }
-            25% { transform: translate(20%, 50%) scale(1.1); opacity: 0.8; }
-            50% { transform: translate(-50%, 10%) scale(1.2); opacity: 1.0; }
-            75% { transform: translate(10%, -40%) scale(1.1); opacity: 0.9; }
-            100% { transform: translate(-30%, -30%) scale(1); opacity: 0.9; }
+            transition: transform 0.2s ease-out;
         }
 
         .content-box {
@@ -55,6 +48,23 @@
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 40px rgba(147, 51, 234, 0.3);
         }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body class="bg-[#0a0a1a] text-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -62,6 +72,8 @@
     <div class="glow-background">
         <div class="fog-effect"></div>
     </div>
+    
+    <div class="particles"></div>
 
     <div class="bg-black/40 rounded-3xl shadow-2xl shadow-purple-900/50 max-w-4xl w-full p-8 md:p-12 space-y-10 border border-gray-800/50 content-box">
         <header class="text-center">
@@ -80,7 +92,7 @@
             </section>
 
             <section class="section-card p-6 rounded-2xl border-l-4 border-red-500/60">
-                <h2 class="text-2xl md:text-3xl font-bold text-red-400 mb-4">The Negative Side</h2>
+                <h2 class="text-2xl md:text-3xl font-bold text-red-400 mb-4">The Negative Side </h2>
                 <p class="text-gray-200 leading-relaxed">
                     But the bad thing is that some people can learn things that are against the law, for example, Swatting, Doxxing, and lots more! Another bad thing is that people can trick you into doing things that can lead to the other bad things that a person can do things like (for e.g, leak your IP/Address, go to your house and kidnap you, and a whole lot more). Another way social media can be bad is by harming mental health, “sleep problems, and anxiety”.
                 </p>
@@ -95,11 +107,29 @@
 
             <section class="md:col-span-2 text-sm text-gray-400 pt-4 border-t border-gray-800/60">
                 <h3 class="text-lg font-semibold text-gray-300 mb-2">Sources:</h3>
-                <ul class="list-disc list-inside space-y-2">
-                    <li><a href="https://raisingchildren.net.au/pre-teens/entertainment-technology/media/media-influence-on-teens#:~:text=Your%20child's%20self%2Dimage%20and,like%20'Thin%20is%20beautiful'." class="text-blue-400 hover:text-blue-300 transition-colors duration-200" target="_blank">Raising Children Network</a></li>
-                    <li><a href="https://www.aecf.org/blog/social-medias-concerning-effect-on-teen-mental-health#:~:text=Similar%20benefits%20have%20been%20found,help%20them%20feel%20more%20accepted." class="text-blue-400 hover:text-blue-300 transition-colors duration-200" target="_blank">AECF.org</a></li>
-                    <li><a href="https://www.pewresearch.org/internet/2022/11/16/2-teens-views-about-social-media/#:~:text=In%20higher%20shares%20than%20White,and%20a%20lot%20more%20accepted.&text=Furthermore%2C%20Black%20teens%20are%20particularly,feel%20a%20lot%20more%20accepted." class="text-blue-400 hover:text-blue-300 transition-colors duration-200" target="_blank">Pew Research Center</a></li>
-                </ul>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <a href="https://raisingchildren.net.au/pre-teens/entertainment-technology/media/media-influence-on-teens#:~:text=Your%20child's%20self%2Dimage%20and,like%20'Thin%20is%20beautiful'." target="_blank" class="flex-1 p-4 rounded-xl border border-blue-500/50 bg-blue-500/10 hover:bg-blue-500/20 transition-all duration-200 flex items-center gap-2">
+                        <span class="text-blue-300">Raising Children Network</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-blue-400">
+                            <path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75V16.5a.75.75 0 00.75.75h9.5A.75.75 0 0014.5 16.5v-2.19l-3.235 3.235a.75.75 0 11-1.06-1.06L13.44 13h-2.19a.75.75 0 010-1.5h4.25a.75.75 0 01.75.75v4.25a.75.75 0 01-.75.75h-9.5a.75.75 0 01-.75-.75V6.25a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd" d="M15.5 4.75a.75.75 0 00-.75.75v4.25a.75.75 0 01-1.5 0V6.25h-2.19a.75.75 0 010-1.5h4.25a.75.75 0 01.75.75v4.25a.75.75 0 01-1.5 0V5.5a.75.75 0 00-.75-.75z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="https://www.aecf.org/blog/social-medias-concerning-effect-on-teen-mental-health#:~:text=Similar%20benefits%20have%20been%20found,help%20them%20feel%20more%20accepted." target="_blank" class="flex-1 p-4 rounded-xl border border-blue-500/50 bg-blue-500/10 hover:bg-blue-500/20 transition-all duration-200 flex items-center gap-2">
+                        <span class="text-blue-300">AECF.org</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-blue-400">
+                            <path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75V16.5a.75.75 0 00.75.75h9.5A.75.75 0 0014.5 16.5v-2.19l-3.235 3.235a.75.75 0 11-1.06-1.06L13.44 13h-2.19a.75.75 0 010-1.5h4.25a.75.75 0 01.75.75v4.25a.75.75 0 01-.75.75h-9.5a.75.75 0 01-.75-.75V6.25a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd" d="M15.5 4.75a.75.75 0 00-.75.75v4.25a.75.75 0 01-1.5 0V6.25h-2.19a.75.75 0 010-1.5h4.25a.75.75 0 01.75.75v4.25a.75.75 0 01-1.5 0V5.5a.75.75 0 00-.75-.75z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="https://www.pewresearch.org/internet/2022/11/16/2-teens-views-about-social-media/#:~:text=In%20higher%20shares%20than%20White,and%20a%20lot%20more%20accepted.&text=Furthermore%2C%20Black%20teens%20are%20particularly,feel%20a%20lot%20more%20accepted." target="_blank" class="flex-1 p-4 rounded-xl border border-blue-500/50 bg-blue-500/10 hover:bg-blue-500/20 transition-all duration-200 flex items-center gap-2">
+                        <span class="text-blue-300">Pew Research Center</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-blue-400">
+                            <path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75V16.5a.75.75 0 00.75.75h9.5A.75.75 0 0014.5 16.5v-2.19l-3.235 3.235a.75.75 0 11-1.06-1.06L13.44 13h-2.19a.75.75 0 010-1.5h4.25a.75.75 0 01.75.75v4.25a.75.75 0 01-.75.75h-9.5a.75.75 0 01-.75-.75V6.25a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd" d="M15.5 4.75a.75.75 0 00-.75.75v4.25a.75.75 0 01-1.5 0V6.25h-2.19a.75.75 0 010-1.5h4.25a.75.75 0 01.75.75v4.25a.75.75 0 01-1.5 0V5.5a.75.75 0 00-.75-.75z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
             </section>
         </main>
     </div>
@@ -112,7 +142,7 @@
                 </svg>
             </button>
             <div class="flex flex-col items-center text-center space-y-4">
-                <img src="https://placehold.co/100x100/38A3A5/ffffff?text=JH" alt="Profile Picture" class="rounded-full ring-2 ring-purple-500/50">
+                <img src="http://school.zgamesinc.qzz.io/king.png" alt="Profile Picture" class="rounded-full ring-2 ring-purple-500/50">
                 <h4 class="text-2xl font-bold text-white">Jayden Hanson</h4>
                 <p class="text-gray-400">jrhanson@dentphelps.k12.mo.us</p>
             </div>
@@ -150,6 +180,72 @@
                     }, 300);
                 }
             });
+
+            const fogEffect = document.querySelector('.fog-effect');
+            let inactivityTimer;
+
+            const startFogAnimation = () => {
+                fogEffect.style.transition = 'transform 20s ease-in-out';
+                const x = (Math.random() - 0.5) * 50;
+                const y = (Math.random() - 0.5) * 50;
+                fogEffect.style.transform = `translate(${x}%, ${y}%)`;
+                inactivityTimer = setTimeout(startFogAnimation, 20000);
+            };
+
+            document.addEventListener('mousemove', (e) => {
+                clearTimeout(inactivityTimer);
+                fogEffect.style.transition = 'transform 0.2s ease-out';
+                const x = (e.clientX / window.innerWidth - 0.5) * 50;
+                const y = (e.clientY / window.innerHeight - 0.5) * 50;
+                fogEffect.style.transform = `translate(${x}%, ${y}%)`;
+
+                inactivityTimer = setTimeout(startFogAnimation, 5000);
+            });
+
+            startFogAnimation();
+
+            const createParticle = () => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 4 + 2;
+                const xPos = Math.random() * window.innerWidth;
+                const duration = Math.random() * 3 + 2;
+                const sidewaysDrift = Math.random() * 200 + 100;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${xPos}px`;
+                particle.style.top = `-20px`;
+
+                document.querySelector('.particles').appendChild(particle);
+
+                const finalY = window.innerHeight + 20;
+
+                particle.animate([
+                    { transform: 'translateY(0) translateX(0)', opacity: 0 },
+                    { opacity: 0.8, offset: 0.1 },
+                    { opacity: 0.8, offset: 0.9 },
+                    { transform: `translateY(${finalY}px) translateX(${sidewaysDrift}px)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'linear',
+                    iterations: 1,
+                    fill: 'forwards'
+                }).onfinish = () => {
+                    const finalSize = Math.random() * 2 + 1;
+                    particle.style.width = `${finalSize}px`;
+                    particle.style.height = `${finalSize}px`;
+                    particle.style.position = 'fixed';
+                    particle.style.bottom = '0';
+                    particle.style.left = `${particle.getBoundingClientRect().left}px`;
+                    particle.style.top = 'auto';
+                    particle.style.transform = `translateY(0) translateX(0)`;
+                    particle.style.opacity = '0.5';
+                    particle.style.filter = 'blur(1px)';
+                };
+            };
+
+            setInterval(createParticle, 50);
         });
     </script>
 </body>
