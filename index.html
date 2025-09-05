@@ -98,7 +98,7 @@
                 </p>
             </section>
 
-            <section class="md:col-span-2 section-card p-8 rounded-2xl border-2 border-dashed border-gray-700/60">
+            <section class="md:col-span-2 section-card p-8 rounded-2xl border-2 border-dashed border-orange-500/60 hover:box-shadow-2xl hover:shadow-orange-500/50 transition-all duration-300">
                 <h3 class="text-lg font-semibold text-gray-300 mb-4">Summary</h3>
                 <p class="text-gray-200 leading-relaxed text-center">
                     There can be an impact on teenagers on social media, good and bad. I think that social media can be bad and good. This is why I think social media can be bad for you, while also being good for you.
@@ -208,43 +208,33 @@
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 const size = Math.random() * 4 + 2;
-                const xPos = Math.random() * window.innerWidth;
+                const startX = Math.random() * window.innerWidth;
                 const duration = Math.random() * 3 + 2;
-                const sidewaysDrift = Math.random() * 200 + 100;
 
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                particle.style.left = `${xPos}px`;
+                particle.style.left = `${startX}px`;
                 particle.style.top = `-20px`;
-
+                
                 document.querySelector('.particles').appendChild(particle);
 
+                const finalX = startX + (Math.random() * 200 - 100);
                 const finalY = window.innerHeight + 20;
 
                 particle.animate([
-                    { transform: 'translateY(0) translateX(0)', opacity: 0 },
+                    { transform: 'translateX(0) translateY(0)', opacity: 0 },
                     { opacity: 0.8, offset: 0.1 },
                     { opacity: 0.8, offset: 0.9 },
-                    { transform: `translateY(${finalY}px) translateX(${sidewaysDrift}px)`, opacity: 0 }
+                    { transform: `translateX(${finalX}px) translateY(${finalY}px)`, opacity: 0 }
                 ], {
                     duration: duration * 1000,
                     easing: 'linear',
                     iterations: 1,
                     fill: 'forwards'
                 }).onfinish = () => {
-                    const finalSize = Math.random() * 2 + 1;
-                    particle.style.width = `${finalSize}px`;
-                    particle.style.height = `${finalSize}px`;
-                    particle.style.position = 'fixed';
-                    particle.style.bottom = '0';
-                    particle.style.left = `${particle.getBoundingClientRect().left}px`;
-                    particle.style.top = 'auto';
-                    particle.style.transform = `translateY(0) translateX(0)`;
-                    particle.style.opacity = '0.5';
-                    particle.style.filter = 'blur(1px)';
+                    particle.remove();
                 };
             };
-
             setInterval(createParticle, 50);
         });
     </script>
