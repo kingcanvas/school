@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0a0a1a;
+            background-color: #04040a;
             overflow-x: hidden;
         }
 
@@ -25,11 +25,12 @@
 
         .fog-effect {
             position: absolute;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.4) 0%, rgba(236, 72, 153, 0.4) 50%, rgba(10, 10, 26, 0) 70%);
-            filter: blur(150px);
-            transition: transform 0.2s ease-out;
+            width: 30vw;
+            height: 30vh;
+            background: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.5) 0%, rgba(236, 72, 153, 0.5) 50%, rgba(10, 10, 26, 0) 70%);
+            filter: blur(80px);
+            transition: left 0.2s ease-out, top 0.2s ease-out;
+            transform: translate(-50%, -50%);
         }
 
         .content-box {
@@ -41,12 +42,19 @@
             background: rgba(15, 15, 30, 0.8);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(38, 38, 62, 0.5);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, ring 0.3s ease-in-out;
         }
 
         .section-card:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 40px rgba(147, 51, 234, 0.3);
+        }
+
+        .positive-glow:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 50px rgba(74, 222, 128, 0.5);
+        }
+
+        .negative-glow:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 50px rgba(248, 113, 113, 0.5);
         }
 
         .particles {
@@ -60,14 +68,23 @@
             overflow: hidden;
         }
 
-        .particle {
+        .snowflake {
             position: absolute;
             background-color: white;
             border-radius: 50%;
+            opacity: 0;
+        }
+
+        .summary-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 50px rgba(251, 191, 36, 0.5);
+        }
+
+        .main-heading:hover {
+            text-shadow: 0 0 10px rgba(147, 51, 234, 0.8), 0 0 20px rgba(147, 51, 234, 0.6);
         }
     </style>
 </head>
-<body class="bg-[#0a0a1a] text-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-[#04040a] text-gray-100 min-h-screen flex items-center justify-center p-4">
 
     <div class="glow-background">
         <div class="fog-effect"></div>
@@ -77,28 +94,28 @@
 
     <div class="bg-black/40 rounded-3xl shadow-2xl shadow-purple-900/50 max-w-4xl w-full p-8 md:p-12 space-y-10 border border-gray-800/50 content-box">
         <header class="text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 transition-all duration-300 transform hover:scale-105 inline-block mb-2">Teenager Impact on Social Media</h1>
+            <h1 class="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 transition-all duration-300 transform hover:scale-105 inline-block mb-2 main-heading">Teenager Impact on Social Media</h1>
             <p id="profile-trigger" class="text-lg md:text-xl text-gray-400 cursor-pointer hover:text-gray-300 transition-colors duration-200">
                 By: Jayden Hanson <span class="text-yellow-400 text-2xl">🎉 🙂</span>
             </p>
         </header>
 
         <main class="grid md:grid-cols-2 gap-8">
-            <section class="section-card p-6 rounded-2xl border-l-4 border-green-500/60">
+            <section class="section-card positive-glow p-6 rounded-2xl border-l-4 border-green-500/60">
                 <h2 class="text-2xl md:text-3xl font-bold text-green-400 mb-4">The Positive Side</h2>
                 <p class="text-gray-200 leading-relaxed">
                     The good part is that you can learn new things on social media. Here's some more information on good things. Social media can also be good by providing teens with a creative outlet, “a support system and access to identity affirming content.”
                 </p>
             </section>
 
-            <section class="section-card p-6 rounded-2xl border-l-4 border-red-500/60">
+            <section class="section-card negative-glow p-6 rounded-2xl border-l-4 border-red-500/60">
                 <h2 class="text-2xl md:text-3xl font-bold text-red-400 mb-4">The Negative Side </h2>
                 <p class="text-gray-200 leading-relaxed">
                     But the bad thing is that some people can learn things that are against the law, for example, Swatting, Doxxing, and lots more! Another bad thing is that people can trick you into doing things that can lead to the other bad things that a person can do things like (for e.g, leak your IP/Address, go to your house and kidnap you, and a whole lot more). Another way social media can be bad is by harming mental health, “sleep problems, and anxiety”.
                 </p>
             </section>
 
-            <section class="md:col-span-2 section-card p-8 rounded-2xl border-2 border-dashed border-orange-500/60 hover:box-shadow-2xl hover:shadow-orange-500/50 transition-all duration-300">
+            <section class="md:col-span-2 section-card summary-card p-8 rounded-2xl border-2 border-dashed border-orange-500/60 transition-all duration-300">
                 <h3 class="text-lg font-semibold text-gray-300 mb-4">Summary</h3>
                 <p class="text-gray-200 leading-relaxed text-center">
                     There can be an impact on teenagers on social media, good and bad. I think that social media can be bad and good. This is why I think social media can be bad for you, while also being good for you.
@@ -183,59 +200,84 @@
 
             const fogEffect = document.querySelector('.fog-effect');
             let inactivityTimer;
+            let isHoveringCard = false;
+            let randomFogTimer;
 
             const startFogAnimation = () => {
-                fogEffect.style.transition = 'transform 20s ease-in-out';
-                const x = (Math.random() - 0.5) * 50;
-                const y = (Math.random() - 0.5) * 50;
-                fogEffect.style.transform = `translate(${x}%, ${y}%)`;
+                fogEffect.style.transition = 'left 20s ease-in-out, top 20s ease-in-out';
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                fogEffect.style.left = `${x}px`;
+                fogEffect.style.top = `${y}px`;
                 inactivityTimer = setTimeout(startFogAnimation, 20000);
             };
 
-            document.addEventListener('mousemove', (e) => {
+            const handleMouseMove = (e) => {
+                if (isHoveringCard) return;
                 clearTimeout(inactivityTimer);
-                fogEffect.style.transition = 'transform 0.2s ease-out';
-                const x = (e.clientX / window.innerWidth - 0.5) * 50;
-                const y = (e.clientY / window.innerHeight - 0.5) * 50;
-                fogEffect.style.transform = `translate(${x}%, ${y}%)`;
-
+                fogEffect.style.transition = 'left 0.2s ease-out, top 0.2s ease-out';
+                fogEffect.style.left = `${e.clientX}px`;
+                fogEffect.style.top = `${e.clientY}px`;
                 inactivityTimer = setTimeout(startFogAnimation, 5000);
+            };
+
+            document.addEventListener('mousemove', handleMouseMove);
+
+            document.querySelectorAll('.section-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    isHoveringCard = true;
+                    clearTimeout(inactivityTimer);
+                    
+                    randomFogTimer = setInterval(() => {
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * window.innerHeight;
+                        fogEffect.style.transition = 'left 1s ease-in-out, top 1s ease-in-out';
+                        fogEffect.style.left = `${x}px`;
+                        fogEffect.style.top = `${y}px`;
+                    }, 1000);
+                });
+                card.addEventListener('mouseleave', () => {
+                    isHoveringCard = false;
+                    clearInterval(randomFogTimer);
+                    inactivityTimer = setTimeout(startFogAnimation, 5000);
+                });
             });
 
             startFogAnimation();
 
-            const createParticle = () => {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
+            const createSnowflake = () => {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
                 const size = Math.random() * 4 + 2;
                 const startX = Math.random() * window.innerWidth;
-                const duration = Math.random() * 3 + 2;
+                const startY = -10;
+                const duration = Math.random() * 5 + 5;
 
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${startX}px`;
-                particle.style.top = `-20px`;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                snowflake.style.left = `${startX}px`;
+                snowflake.style.top = `${startY}px`;
                 
-                document.querySelector('.particles').appendChild(particle);
+                document.querySelector('.particles').appendChild(snowflake);
 
-                const finalX = startX + (Math.random() * 200 - 100);
-                const finalY = window.innerHeight + 20;
+                const finalX = startX + (Math.random() * 200 + 100); 
+                const finalY = window.innerHeight + 10;
 
-                particle.animate([
+                snowflake.animate([
                     { transform: 'translateX(0) translateY(0)', opacity: 0 },
                     { opacity: 0.8, offset: 0.1 },
                     { opacity: 0.8, offset: 0.9 },
-                    { transform: `translateX(${finalX}px) translateY(${finalY}px)`, opacity: 0 }
+                    { transform: `translateX(${finalX - startX}px) translateY(${finalY - startY}px)`, opacity: 0 }
                 ], {
                     duration: duration * 1000,
                     easing: 'linear',
                     iterations: 1,
                     fill: 'forwards'
                 }).onfinish = () => {
-                    particle.remove();
+                    snowflake.remove();
                 };
             };
-            setInterval(createParticle, 50);
+            setInterval(createSnowflake, 100);
         });
     </script>
 </body>
